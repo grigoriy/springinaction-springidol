@@ -6,10 +6,26 @@
     <bean id="duke" class="com.springinaction.springidol.Juggler">
         <constructor-arg value="15" />
     </bean>
-    <bean id="sonnet29" class="com.springinaction.springidol.Sonnet29" />
+
+    <bean id="sonnet29" class="com.springinaction.springidol.Sonnet29">
+    </bean>
+
     <bean id="poeticDuke" class="com.springinaction.springidol.PoeticJuggler">
-        <constructor-arg value="15" />
+        <constructor-arg value="10" />
         <constructor-arg ref="sonnet29" />
     </bean>
 
+    <bean id="stage" class="com.springinaction.springidol.Stage" factory-method="getInstance">
+    </bean>
+
+    <bean id="ticket" class="com.springinaction.springidol.Ticket" scope="prototype">
+    </bean>
+
+    <bean id="auditorium" class="com.springinaction.springidol.Auditorium"
+          init-method="turnOnLights" destroy-method="turnOffLights">
+    </bean>
+
+    <bean id="kenny" class="com.springinaction.springidol.Instrumentalist" destroy-method="destroy">
+        <property name="song" value="Jingle Bells" />
+    </bean>
 </beans>
