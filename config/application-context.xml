@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="duke" class="com.springinaction.springidol.Juggler">
         <constructor-arg value="15" />
@@ -22,10 +24,31 @@
     </bean>
 
     <bean id="auditorium" class="com.springinaction.springidol.Auditorium"
-          init-method="turnOnLights" destroy-method="turnOffLights">
+        init-method="turnOnLights" destroy-method="turnOffLights"></bean>
+
+    <bean id="kenny" class="com.springinaction.springidol.Instrumentalist">
+        <property name="song" value="Jingle Bells" />
+        <property name="instrument">
+            <bean class="com.springinaction.springidol.Saxophone"></bean> 
+        </property>
     </bean>
 
-    <bean id="kenny" class="com.springinaction.springidol.Instrumentalist" destroy-method="destroy">
-        <property name="song" value="Jingle Bells" />
+    <bean id="saxophone" class="com.springinaction.springidol.Saxophone"></bean>
+
+    <bean id="piano" class="com.springinaction.springidol.Piano"></bean>
+
+    <bean id="hank" class="com.springinaction.springidol.OneManBand">
+        <property name="instruments">
+            <props>
+                <prop key="GUITAR">STRUM STRUM STRUM</prop>
+                <prop key="CYMBAL">CRASH CRASH CRASH</prop>
+                <prop key="HARMONICA">HUM HUM HUM</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="carl" class="com.springinaction.springidol.Instrumentalist">
+        <property name="song" value="#{kenny.song}"></property>
+        <property name="instrument" value="#{kenny.song == 'Jingle Bells' ? piano : saxophone}"></property>
     </bean>
 </beans>

@@ -1,5 +1,6 @@
 package com.springinaction.springidol;
 
+
 import com.springinaction.springidol.exceptions.PerformanceException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -8,10 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hello world!
- *
- */
+
 public class App {
 
     public static void main( String[] args ) {
@@ -23,12 +21,15 @@ public class App {
         performers.add((Performer) context.getBean("duke"));
         performers.add((Performer) context.getBean("poeticDuke"));
         performers.add((Performer) context.getBean("kenny"));
+        performers.add((Performer) context.getBean("hank"));
+        performers.add((Performer) context.getBean("carl"));
 
         Stage stage = (Stage) context.getBean("stage");
         Auditorium auditorium = (Auditorium) context.getBean("auditorium");
         try {
             for (Performer performer : performers) {
                 performer.perform();
+                System.out.println("\n*   *   *\n");
             }
 
         } catch (PerformanceException e) {
